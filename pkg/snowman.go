@@ -41,18 +41,18 @@ func (g *Game) Play() {
 		g.printBoard()
 
 		reader := bufio.NewReader(os.Stdin)
-		input, err := reader.ReadString('\n')
+		input, _, err := reader.ReadRune()
 		if err != nil {
 			fmt.Println("Error reading input, please guess again")
 			continue
 		}
 
-		if !unicode.IsLetter(rune(input)) {
+		if !unicode.IsLetter(input) {
 			fmt.Println("Guess must be a letter, please guess again")
 			continue
 		}
 
-		guess := strings.ToLower(strings.TrimSpace(input))
+		guess := strings.ToLower(strings.TrimSpace(string(input)))
 		if len(guess) != 1 {
 			fmt.Println("Guess must be one letter, please guess again")
 			continue
